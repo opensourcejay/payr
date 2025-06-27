@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>PAYR - Pay All Your Responsibilities</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src *; child-src *;"
+    />
+
+    <link href="./assets/main.css" type="text/css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="layout">
+      <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">PAYR</h2>
+          <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+        </div>
+        <div class="sidebar-content">
+          <button id="add-site-btn" class="add-site-btn" title="Add new bill payment site">+</button>
+          <div id="bill-sites" class="bill-sites">
+          </div>
+        </div>
+      </div>
+      <div id="app">
+        <div id="welcome-screen" class="welcome-screen">
+          <h1 class="app-title">PAYR</h1>
+          <p class="app-tagline">Pay All Your Responsibilities</p>
+          <p class="tip">Click the + button in the sidebar to add your first bill payment site</p>
+        </div>
+
+        <div id="config-form" class="config-form hidden">
+          <h3 id="form-title">Add Bill Payment Site</h3>
+          <form id="site-form">
+            <div class="form-group">
+              <label for="site-name">Site Name:</label>
+              <input type="text" id="site-name" required placeholder="e.g., State Farm">
+            </div>
+            <div class="form-group">
+              <label for="site-category">Category:</label>
+              <select id="site-category" required>
+                <option value="">Select a category</option>
+                <option value="insurance">🛡️ Insurance</option>
+                <option value="utilities">⚡ Utilities</option>
+                <option value="credit-cards">💳 Credit Cards</option>
+                <option value="loans">🏠 Loans & Mortgages</option>
+                <option value="subscriptions">📺 Subscriptions</option>
+                <option value="healthcare">🏥 Healthcare</option>
+                <option value="government">🏛️ Government</option>
+                <option value="other">📋 Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="site-url">Bill Payment URL:</label>
+              <input type="url" id="site-url" required placeholder="e.g., https://statefarm.com/billpay">
+            </div>
+            <div class="form-actions">
+              <button type="submit" id="save-btn">Save</button>
+              <button type="button" id="cancel-form">Cancel</button>
+              <button type="button" id="delete-site-btn" class="delete-btn hidden">Delete</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="bill-payment-view" class="bill-payment-view hidden">
+          <div class="payment-header">
+            <h3 id="current-site-name">Loading...</h3>
+            <div class="payment-controls">
+              <button id="refresh-payment-view" class="refresh-btn" title="Refresh page">↻</button>
+              <button id="close-payment-view" class="close-btn">×</button>
+            </div>
+          </div>
+          <webview id="payment-webview" src="" allowpopups disablewebsecurity></webview>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/renderer.js"></script>
+  </body>
+</html>
